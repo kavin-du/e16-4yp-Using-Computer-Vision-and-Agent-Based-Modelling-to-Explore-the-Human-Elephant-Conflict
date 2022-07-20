@@ -3,24 +3,25 @@ layout: home
 permalink: index.html
 
 # Please update this with your repository name and title
-repository-name: eYY-4yp-project-template
+repository-name: e16-4yp-Using-Computer-Vision-and-Agent-Based-Modelling-to-Explore-the-Human-Elephant-Conflict
 title:
 ---
 
 [comment]: # "This is the standard layout for the project, but you can clean this and use your own template"
 
-# Project Title
+# Using Computer Vision and Agent-Based Modelling to explore the Human-Elephant conflict
 
 #### Team
 
-- eNumber, Name, [email](mailto:name@email.com)
-- eNumber, Name, [email](mailto:name@email.com)
-- eNumber, Name, [email](mailto:name@email.com)
+- E/16/057, Chamith U.K.D.K, [email](mailto:e16057@eng.pdn.ac.lk)
+- E/16/076, Deshan L.A.C, [email](mailto:e16076@eng.pdn.ac.lk)
+- E/16/368, Thisanke M.K.H, [email](mailto:e16368@eng.pdn.ac.lk)
 
 #### Supervisors
 
-- Name, [email](mailto:name@eng.pdn.ac.lk)
-- Name, [email](mailto:name@eng.pdn.ac.lk)
+- Dr. Damayanthi Herath, [email](mailto:damayanthiherath@eng.pdn.ac.lk)
+- Dr. Sachith Seneviratne, [email](mailto:sachith.seneviratne@unimelb.edu.au)
+- Dr. Rajith Vidanaarachchi, [email](mailto:rajith.vidanaarachchi@unimelb.edu.au)
 
 #### Table of content
 
