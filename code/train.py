@@ -58,7 +58,7 @@ Do I have to calculate an output prediction with output.argmax(1) for input into
 No, nn.CrossEntropyLoss expects the logits for each class. You could use torch.argmax(output, dim=1) 
 to compute the predictions, where each pixel would contain the the predicted class index.
 """
-"""
+
 #unet = UNet(n_channels = 3, n_classes=8)
 unet = UNetResNet(num_classes=8)
 unet.train()
@@ -116,7 +116,7 @@ model_file = './models/unet-' + str(epoch_idx)
 torch.save(unet.state_dict(), model_file)
 print ('model saved')
 
-"""
+
 unet_resnet = UNetResNet(num_classes=8)
 model_path= './models/unet-14'
 pretrained_model = torch.load(model_path)
