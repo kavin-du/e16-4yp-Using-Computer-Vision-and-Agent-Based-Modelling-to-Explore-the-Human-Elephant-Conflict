@@ -167,7 +167,7 @@ def main():
     loss_history = np.array(loss_history)
     plt.figure(figsize=(15, 10))
     plt.plot(loss_history[:,0], loss_history[:,1], color='b', linewidth=3)
-    plt.plot(loss_history[:,0], loss_history[:,2], color='b', linewidth=3)
+    plt.plot(loss_history[:,0], loss_history[:,2], color='r', linewidth=3)
     plt.title('Focal Loss')
     plt.xlabel('epoch'), plt.ylabel('loss')
     plt.grid()
