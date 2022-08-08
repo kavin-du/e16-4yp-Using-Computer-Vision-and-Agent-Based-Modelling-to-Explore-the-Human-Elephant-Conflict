@@ -1,11 +1,12 @@
+from cProfile import label
 import torch
-import torchvision
 from dataset import SatelliteDataset
 from torch.utils.data import DataLoader
 import numpy as np
 import torch.nn.functional as F
 from matplotlib import pyplot as plt
-import os, argparse
+import argparse
+from matplotlib.patches import Patch
 
 def get_arguments():
   parser = argparse.ArgumentParser()
@@ -87,19 +88,37 @@ def save_image(folder, index, original, mask):
   height, width = mask.shape[0], mask.shape[1]
 
   mapping = {
-      0: (0, 0, 0), # ignore
-      1: (255, 255, 255), # background
-      2: (255, 0, 0), # building
-      3: (255, 255, 0), # road
-      4: (0, 0, 255), # water
-      5: (159, 129, 183), # barren
-      6: (0, 255, 0), # forest
-      7: (255, 195, 128)} # agricultural
+    0: (0, 0, 0), # ignore
+    1: (255, 255, 255), # background
+    2: (255, 0, 0), # building
+    3: (255, 255, 0), # road
+    4: (0, 0, 255), # water
+    5: (159, 129, 183), # barren
+    6: (0, 255, 0), # forest
+    7: (255, 195, 128) # agricultural
+  } 
+
+  mapping_info = {
+    0: 'Ignore',
+    1: 'Background',
+    2: 'Building',
+    3: 'Road',
+    4: 'Water',
+    5: 'Barren',
+    6: 'Forest',
+    7: 'Agricultural'
+  } 
+
+  map_legend = []
 
 
   colored_mask = torch.zeros(height, width, 3, dtype=torch.uint8)
 
   for k in mapping:   
+    # color normalized for matplotlib legend
+    color_normalized =  tuple(t/255.0 for t in mapping[k])
+    map_legend.append(Patch(color=color_normalized, label=mapping_info[k]))
+
     idx = (mask == torch.tensor(k, dtype=torch.uint8))
     validx = (idx == 1)
     colored_mask[validx,:] = torch.tensor(mapping[k], dtype=torch.uint8)
@@ -115,11 +134,16 @@ def save_image(folder, index, original, mask):
 
   plt.subplot(1,2,2)
   plt.imshow(colored_mask)
+
+  plt.figlegend(handles=map_legend, loc='center', fontsize=20)
+  plt.subplots_adjust(wspace=0.5)
   
   plt.savefig(f'{folder}/{index}.png')
   print(f'{folder}/{index}.png')
 
 
+
+'''
 def save_predictions_as_imgs(loader, model, folder='saved_images', device='cuda'):
   os.makedirs(folder, exist_ok=True)
   model.eval()
@@ -180,3 +204,5 @@ def save_predictions_as_imgs(loader, model, folder='saved_images', device='cuda'
     # torchvision.utils.save_image(orig, f'{folder}/{index}.png')
 
   model.train()
+
+'''
