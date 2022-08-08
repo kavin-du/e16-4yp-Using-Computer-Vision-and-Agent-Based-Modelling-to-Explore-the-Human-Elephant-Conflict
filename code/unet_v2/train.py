@@ -35,7 +35,7 @@ VAL_MASK_DIR = os.path.join(BASE_DIR, 'Val/Rural/masks_png')
 TEST_DATA_DIR = os.path.join(BASE_DIR, 'Test/Rural/images_png')
 
 MODEL_FOLDER = 'saved_models' # saved models in each epoch
-SAVED_IMAGE_FOLDER = 'saved_images'
+SAVED_IMAGE_FOLDER = 'visualizations'
 
 def acc(y, pred_mask):
   seg_acc = (y.cpu() == torch.argmax(pred_mask, axis=1).cpu()).sum() / torch.numel(y.cpu())
@@ -43,7 +43,10 @@ def acc(y, pred_mask):
 
 def main():
   # out_channels = no of segmentation classes
-  model = UNET(in_channels=3, out_channels=8).to(DEVICE) 
+  model = UNET(in_channels=3, out_channels=8).to(DEVICE)
+  # model = UNET(in_channels=3, out_channels=8)
+  # model = torch.nn.DataParallel(model)
+  # model = model.to(DEVICE)
   
   if TEST_MODE is False:
     # loss_fn = mIoULoss(n_classes=8).to(DEVICE)
@@ -188,7 +191,7 @@ def main():
 
     test_loader = get_test_loaders(TEST_DATA_DIR, test_transforms, NUM_WORKERS, PIN_MEMORY)
 
-    model.load_state_dict(torch.load(MODEL_PATH))
+    model.load_state_dict(torch.load(MODEL_PATH), strict=False)
 
     os.makedirs(f'{SAVED_IMAGE_FOLDER}', exist_ok=True)
 
