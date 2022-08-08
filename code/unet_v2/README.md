@@ -41,4 +41,3 @@ You can compare the original image vs the masked image in the same plot.
 ![2](https://user-images.githubusercontent.com/59405594/183392572-31674a18-7403-4e80-8f8c-e65e2bc07cfd.jpg)
 
 
-## add parallelism

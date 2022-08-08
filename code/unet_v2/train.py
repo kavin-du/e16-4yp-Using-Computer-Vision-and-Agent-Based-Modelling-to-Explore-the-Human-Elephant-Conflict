@@ -43,10 +43,10 @@ def acc(y, pred_mask):
 
 def main():
   # out_channels = no of segmentation classes
-  model = UNET(in_channels=3, out_channels=8).to(DEVICE)
-  # model = UNET(in_channels=3, out_channels=8)
-  # model = torch.nn.DataParallel(model)
-  # model = model.to(DEVICE)
+  # model = UNET(in_channels=3, out_channels=8).to(DEVICE)
+  
+  unet = UNET(in_channels=3, out_channels=8)
+  model = torch.nn.DataParallel(unet).to(DEVICE)
   
   if TEST_MODE is False:
     # loss_fn = mIoULoss(n_classes=8).to(DEVICE)
@@ -159,7 +159,7 @@ def main():
       if is_best:
         scheduler_counter = 0
         min_loss = min(compare_loss, min_loss)
-        torch.save(model.state_dict(), '{}/unet_epoch_{}_{:.5f}.pt'.format(MODEL_FOLDER, epoch, np.mean(val_loss_list)))
+        torch.save(model.module.state_dict(), '{}/unet_epoch_{}_{:.5f}.pt'.format(MODEL_FOLDER, epoch, np.mean(val_loss_list)))
 
       if scheduler_counter > 5:
         lr_scheduler.step()
@@ -191,7 +191,10 @@ def main():
 
     test_loader = get_test_loaders(TEST_DATA_DIR, test_transforms, NUM_WORKERS, PIN_MEMORY)
 
-    model.load_state_dict(torch.load(MODEL_PATH), strict=False)
+    # model.load_state_dict(torch.load(MODEL_PATH))
+
+    unet.load_state_dict(torch.load(MODEL_PATH))
+    model = torch.nn.DataParallel(unet).to(DEVICE)
 
     os.makedirs(f'{SAVED_IMAGE_FOLDER}', exist_ok=True)
 
