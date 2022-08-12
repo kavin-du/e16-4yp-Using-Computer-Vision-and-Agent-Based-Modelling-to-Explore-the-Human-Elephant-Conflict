@@ -1,3 +1,4 @@
+from asyncio.log import logger
 import torch
 import albumentations as A
 from albumentations.pytorch import ToTensorV2
@@ -9,6 +10,7 @@ from loss_functions import mIoULoss, FocalLoss
 import os
 import numpy as np
 from matplotlib import pyplot as plt
+from loguru import logger
 
 from utils import get_train_loaders, get_test_loaders, get_arguments, save_image
 
@@ -47,12 +49,10 @@ def main():
   
   if ARCHITECTURE == 'UNet':
     unet = UNET(in_channels=3, out_channels=8)
-  else:  
-    unet = UNetWithResnet50Encoder(n_classes=8)
-  """  
   elif ARCHITECTURE == 'UNet-Resnet50':  
     unet = UNetWithResnet50Encoder(n_classes=8)
-  """  
+  else:  
+    logger.debug("no architecture is selected")
   model = torch.nn.DataParallel(unet).to(DEVICE)
   
   if TEST_MODE is False:
