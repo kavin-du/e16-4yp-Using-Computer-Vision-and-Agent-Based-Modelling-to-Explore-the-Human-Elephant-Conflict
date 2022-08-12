@@ -56,8 +56,8 @@ def main():
   model = torch.nn.DataParallel(unet).to(DEVICE)
   
   if TEST_MODE is False:
-    # loss_fn = mIoULoss(n_classes=8).to(DEVICE)
-    loss_fn = FocalLoss(gamma=3/4).to(DEVICE)
+    loss_fn = mIoULoss(n_classes=8).to(DEVICE)
+    #loss_fn = FocalLoss(gamma=3/4).to(DEVICE)
     optimizer = optim.Adam(model.parameters(), lr=LEARNING_RATE)
     lr_scheduler = optim.lr_scheduler.StepLR(optimizer, step_size=1, gamma=0.5)
     min_loss = torch.tensor(float('inf'))
