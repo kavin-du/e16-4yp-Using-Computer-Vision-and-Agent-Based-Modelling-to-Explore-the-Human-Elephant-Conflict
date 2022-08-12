@@ -6,6 +6,7 @@
 `-t` or `--testing` ,               default=False   => switch between training and testing\
 `-m` or `--model` ,       type=str, default=None    => relative path for the saved model\
 `-d` or `--dataset` ,     type=str, default='.'     => relative path for the dataset\
+`-a` or `--architecture` ,     type=str, default='UNet'  => select the architecture (UNet or UNet-Resnet50)
 
 ## directory structure for satellite images
 
@@ -22,6 +23,10 @@ _'Test' folder is not essential when model trains_
 _epochs=50, batch size=16, resolution=1024, dataset path='../datasets'_
 
 `python3 train.py -e 50 -b 16 -d ../datasets -r 1024`
+
+_epochs=100, batch size=8, resolution=512, dataset path='../datasets'_ , architecture= UNet-Resnet50
+
+`python3 train.py -e 50 -b 16 -d ../datasets -r 1024 -a UNet-Resnet50`
 
 
 ## example for model testing with test images
