@@ -16,6 +16,7 @@ def get_arguments():
   parser.add_argument('-t', '--testing', action='store_true', help='switch between training and testing')
   parser.add_argument('-m', '--model', type=str,default=None, help='path for the saved model')
   parser.add_argument('-d', '--dataset', type=str,default='.', help='dataset folder path')
+  parser.add_argument('-a', '--architecture', type=str,default='UNet', help='model architecture')
   return parser.parse_args()
 
 def save_checkpoint(state, filename='my_checkpoint.pth.tar'):

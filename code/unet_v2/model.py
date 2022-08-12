@@ -74,19 +74,6 @@ class UNET(nn.Module):
       x = self.ups[idx+1](concat_skip)
     
     return self.final_conv(x)
-"""
-def test():
-  # batch size, no of channels
-  x = torch.randn((3, 1, 160, 160))
-  model = UNET(in_channels=1, out_channels=1)
-  preds = model(x)
-  print(x.shape)
-  print(preds.shape)
-  assert preds.shape == x.shape
-
-if __name__ == '__main__':
-    test()
-""" 
 
 """-------------------  UNet-encoder-ResNet50   -------------------------------------"""
 class ConvBlock(nn.Module):
@@ -159,7 +146,7 @@ class UpBlockForUNetWithResNet50(nn.Module):
 class UNetWithResnet50Encoder(nn.Module):
     DEPTH = 6
 
-    def __init__(self, n_classes=2):
+    def __init__(self, n_classes=8):
         super().__init__()
         resnet = torchvision.models.resnet.resnet50(pretrained=True)
         down_blocks = []
@@ -208,7 +195,3 @@ class UNetWithResnet50Encoder(nn.Module):
             return x, output_feature_map
         else:
             return x
-
-model = UNetWithResnet50Encoder().cuda()
-inp = torch.rand((2, 3, 512, 512)).cuda()
-out = model(inp)

@@ -4,7 +4,7 @@ from albumentations.pytorch import ToTensorV2
 from tqdm import tqdm
 import torch.nn.functional as F
 import torch.optim as optim
-from model import UNET
+from model import UNET, UNetWithResnet50Encoder
 from loss_functions import mIoULoss, FocalLoss
 import os
 import numpy as np
@@ -26,7 +26,7 @@ PIN_MEMORY = True
 TEST_MODE = args.testing 
 MODEL_PATH = args.model
 BASE_DIR = args.dataset
-# BASE_DIR = '/home/e16057/Projects/datasets'
+ARCHITECTURE = args.architecture
 
 TRAIN_IMG_DIR = os.path.join(BASE_DIR, 'Train/Rural/images_png')
 TRAIN_MASK_DIR = os.path.join(BASE_DIR, 'Train/Rural/masks_png')
@@ -45,7 +45,14 @@ def main():
   # out_channels = no of segmentation classes
   # model = UNET(in_channels=3, out_channels=8).to(DEVICE)
   
-  unet = UNET(in_channels=3, out_channels=8)
+  if ARCHITECTURE == 'UNet':
+    unet = UNET(in_channels=3, out_channels=8)
+  else:  
+    unet = UNetWithResnet50Encoder(n_classes=8)
+  """  
+  elif ARCHITECTURE == 'UNet-Resnet50':  
+    unet = UNetWithResnet50Encoder(n_classes=8)
+  """  
   model = torch.nn.DataParallel(unet).to(DEVICE)
   
   if TEST_MODE is False:
