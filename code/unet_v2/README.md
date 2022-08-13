@@ -6,6 +6,7 @@
 `-t` or `--testing` ,               default=False   => switch between training and testing\
 `-m` or `--model` ,       type=str, default=None    => relative path for the saved model\
 `-d` or `--dataset` ,     type=str, default='.'     => relative path for the dataset\
+`-a` or `--architecture` ,     type=str, default='UNet'     => model architecture need to train\
 
 ## directory structure for satellite images
 
