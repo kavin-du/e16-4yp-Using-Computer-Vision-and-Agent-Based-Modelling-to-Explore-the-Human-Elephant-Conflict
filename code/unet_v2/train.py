@@ -166,7 +166,7 @@ def main():
       if is_best:
         scheduler_counter = 0
         min_loss = min(compare_loss, min_loss)
-        torch.save(model.module.state_dict(), '{}/{}_epoch_{}_{:.5f}.pt'.format(ARCHITECTURE, MODEL_FOLDER, epoch, np.mean(val_loss_list)))
+        torch.save(model.module.state_dict(), '{}/{}_epoch_{}_{:.5f}.pt'.format(MODEL_FOLDER, ARCHITECTURE, epoch, np.mean(val_loss_list)))
 
       if scheduler_counter > 5:
         lr_scheduler.step()
