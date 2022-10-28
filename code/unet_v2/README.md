@@ -5,7 +5,9 @@
 `-r` or `--resolution` ,  type=int, default=1024    => resolution of image SxS\
 `-t` or `--testing` ,               default=False   => switch between training and testing\
 `-m` or `--model` ,       type=str, default=None    => relative path for the saved model\
-`-d` or `--dataset` ,     type=str, default='.'     => relative path for the dataset
+`-d` or `--dataset` ,     type=str, default='.'     => relative path for the dataset\
+`-a` or `--architecture` ,     type=str, default='UNet'     => model architecture need to train , default = 'UNet' and other = 'UNet-Resnet50'
+
 
 ## directory structure for satellite images
 

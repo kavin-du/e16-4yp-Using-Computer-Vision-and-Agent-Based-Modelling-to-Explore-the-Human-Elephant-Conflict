@@ -1,14 +1,16 @@
+from asyncio.log import logger
 import torch
 import albumentations as A
 from albumentations.pytorch import ToTensorV2
 from tqdm import tqdm
 import torch.nn.functional as F
 import torch.optim as optim
-from model import UNET
+from model import UNET, UNetWithResnet50Encoder
 from loss_functions import mIoULoss, FocalLoss
 import os
 import numpy as np
 from matplotlib import pyplot as plt
+from loguru import logger
 
 from utils import get_train_loaders, get_test_loaders, get_arguments, save_image
 
@@ -26,7 +28,7 @@ PIN_MEMORY = True
 TEST_MODE = args.testing 
 MODEL_PATH = args.model
 BASE_DIR = args.dataset
-# BASE_DIR = '/home/e16057/Projects/datasets'
+ARCHITECTURE = args.architecture
 
 TRAIN_IMG_DIR = os.path.join(BASE_DIR, 'Train/Rural/images_png')
 TRAIN_MASK_DIR = os.path.join(BASE_DIR, 'Train/Rural/masks_png')
@@ -45,12 +47,17 @@ def main():
   # out_channels = no of segmentation classes
   # model = UNET(in_channels=3, out_channels=8).to(DEVICE)
   
-  unet = UNET(in_channels=3, out_channels=8)
+  if ARCHITECTURE == 'UNet':
+    unet = UNET(in_channels=3, out_channels=8)
+  elif ARCHITECTURE == 'UNet-Resnet50':  
+    unet = UNetWithResnet50Encoder(n_classes=8)
+  else:  
+    logger.debug("no architecture is selected")
   model = torch.nn.DataParallel(unet).to(DEVICE)
   
   if TEST_MODE is False:
-    # loss_fn = mIoULoss(n_classes=8).to(DEVICE)
-    loss_fn = FocalLoss(gamma=3/4).to(DEVICE)
+    loss_fn = mIoULoss(n_classes=8).to(DEVICE)
+    #loss_fn = FocalLoss(gamma=3/4).to(DEVICE)
     optimizer = optim.Adam(model.parameters(), lr=LEARNING_RATE)
     lr_scheduler = optim.lr_scheduler.StepLR(optimizer, step_size=1, gamma=0.5)
     min_loss = torch.tensor(float('inf'))
@@ -159,7 +166,7 @@ def main():
       if is_best:
         scheduler_counter = 0
         min_loss = min(compare_loss, min_loss)
-        torch.save(model.module.state_dict(), '{}/unet_epoch_{}_{:.5f}.pt'.format(MODEL_FOLDER, epoch, np.mean(val_loss_list)))
+        torch.save(model.module.state_dict(), '{}/{}_epoch_{}_{:.5f}.pt'.format(MODEL_FOLDER, ARCHITECTURE, epoch, np.mean(val_loss_list)))
 
       if scheduler_counter > 5:
         lr_scheduler.step()
