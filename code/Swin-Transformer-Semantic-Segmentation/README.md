@@ -1,9 +1,39 @@
-conda create -n open-mmlab python=3.7 -y
-conda activate open-mmlab
+1. Run the following script to create environments using Conda. Enter the desired name for the env. 
+```console
+bash script1_create_env.sh
+```
 
-conda install -c zimmf cudatoolkit   # cuda 11.1
-conda install pytorch=1.8.1 torchvision -c pytorch
+2. Restart your shell and activate the above env. 
+```console
+conda activate <ENV_NAME>
+```
 
-pip install mmcv-full==1.3.0 -f https://download.openmmlab.com/mmcv/dist/cu111/torch1.8/index.html
+3. Run the 2nd script to install the Python packages. 
+```console
+bash script2_install_packages.sh
+```
 
-pip install -r requirements.txt
+4. Run the 3rd script to download the dataset, prepare the directories and extract the data. 
+```console
+bash script3_prepare_datasets.sh
+```
+
+We are using the pre-trained model `swin_tiny_patch4_window7_224_22k`.
+If you want to try with a different pre-trained model you may download it from here. 
+[https://github.com/microsoft/Swin-Transformer#main-results-on-imagenet-with-pretrained-models](url)
+
+
+5. To train with a pre-trained model: 
+```python
+# single-gpu training
+python tools/train.py <CONFIG_FILE> --options model.pretrained=<PRETRAIN_MODEL> [model.backbone.use_checkpoint=True] [other optional arguments]
+
+# multi-gpu training
+tools/dist_train.sh <CONFIG_FILE> <GPU_NUM> --options model.pretrained=<PRETRAIN_MODEL> [model.backbone.use_checkpoint=True] [other optional arguments] 
+```
+For example, to train an UPerNet model with a Swin-T backbone and 8 GPUs, run:
+
+```python
+tools/dist_train.sh configs/swin/upernet_swin_tiny_patch4_window7_512x512_160k_loveda.py 8 --options model.pretrained=swin_tiny_patch4_window7_224_22k.pth
+
+```
