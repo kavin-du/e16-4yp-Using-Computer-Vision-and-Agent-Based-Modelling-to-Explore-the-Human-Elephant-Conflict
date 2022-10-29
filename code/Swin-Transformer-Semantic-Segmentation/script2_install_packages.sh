@@ -1,7 +1,7 @@
 #!/bin/bash
 
 conda install -y -c zimmf cudatoolkit   # cuda 11.1
-conda install -y pytorch=1.8.1 torchvision -c pytorch
+conda install -y pytorch=1.8.1 torchvision=0.9.1 -c pytorch
 
 pip install mmcv-full==1.3.0 -f https://download.openmmlab.com/mmcv/dist/cu111/torch1.8/index.html
 

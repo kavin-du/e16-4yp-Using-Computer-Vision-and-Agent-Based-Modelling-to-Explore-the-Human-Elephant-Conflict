@@ -20,7 +20,7 @@ bash script3_prepare_datasets.sh
 
 We are using the pre-trained model `swin_tiny_patch4_window7_224_22k`.
 If you want to try with a different pre-trained model you may download it from here. 
-[https://github.com/microsoft/Swin-Transformer#main-results-on-imagenet-with-pretrained-models](url)
+[https://github.com/microsoft/Swin-Transformer#main-results-on-imagenet-with-pretrained-models](https://github.com/microsoft/Swin-Transformer#main-results-on-imagenet-with-pretrained-models)
 
 
 5. To train with a pre-trained model: 
