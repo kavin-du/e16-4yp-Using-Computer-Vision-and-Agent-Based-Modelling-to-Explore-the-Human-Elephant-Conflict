@@ -18,6 +18,11 @@ bash script2_install_packages.sh
 bash script3_prepare_datasets.sh
 ```
 
+5. Run the 4th script to download pretrained models. 
+```console
+bash script4_download_models.sh
+```
+
 We are using the pre-trained model `swin_tiny_patch4_window7_224_22k`.
 If you want to try with a different pre-trained model you may download it from here. 
 [https://github.com/microsoft/Swin-Transformer#main-results-on-imagenet-with-pretrained-models](https://github.com/microsoft/Swin-Transformer#main-results-on-imagenet-with-pretrained-models)
@@ -25,7 +30,7 @@ If you want to try with a different pre-trained model you may download it from h
 
 5. To train with a pre-trained model: 
 ```python
-# single-gpu training
+# single-gpu training - not working for now/ will update soon
 python tools/train.py <CONFIG_FILE> --options model.pretrained=<PRETRAIN_MODEL> [model.backbone.use_checkpoint=True] [other optional arguments]
 
 # multi-gpu training
@@ -35,5 +40,12 @@ For example, to train an UPerNet model with a Swin-T backbone and 8 GPUs, run:
 
 ```python
 tools/dist_train.sh configs/swin/upernet_swin_tiny_patch4_window7_512x512_160k_loveda.py 8 --options model.pretrained=swin_tiny_patch4_window7_224_22k.pth
+
+```
+
+*To train Swin-T MoBY SSL backbone using 8 GPUs, run:
+
+```python
+tools/dist_train.sh configs/swin/upernet_swin_tiny_patch4_window7_512x512_160k_loveda.py 8 --options model.pretrained=moby_swin_t_300ep_pretrained.pth
 
 ```
