@@ -110,11 +110,24 @@ def voc_palette():
             [192, 0, 128], [64, 128, 128], [192, 128, 128], [0, 64, 0],
             [128, 64, 0], [0, 192, 0], [128, 192, 0], [0, 64, 128]]
 
+def loveda_classes():
+    """LoveDA class names for external use."""
+    return [
+        'background', 'building', 'road', 'water', 'barren', 'forest',
+        'agricultural'
+    ]
+
+def loveda_palette():
+    """LoveDA palette for external use."""
+    return [[255, 255, 255], [255, 0, 0], [255, 255, 0], [0, 0, 255],
+            [159, 129, 183], [0, 255, 0], [255, 195, 128]]
+
 
 dataset_aliases = {
     'cityscapes': ['cityscapes'],
     'ade': ['ade', 'ade20k'],
-    'voc': ['voc', 'pascal_voc', 'voc12', 'voc12aug']
+    'voc': ['voc', 'pascal_voc', 'voc12', 'voc12aug'],
+    'loveda': ['loveda'],
 }
 
 
