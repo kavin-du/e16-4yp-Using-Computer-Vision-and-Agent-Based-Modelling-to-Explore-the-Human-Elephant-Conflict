@@ -1,3 +1,5 @@
+Open inference in Colab: {{ badge demo/inference_demo.ipynb }}
+
 1. Run the following script to create environments using Conda. Enter the desired name for the env. 
 ```console
 bash script1_create_env.sh
