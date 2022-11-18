@@ -1,6 +1,6 @@
 Check inference in Colab [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://githubtocolab.com/kavin-du/e16-4yp-Using-Computer-Vision-and-Agent-Based-Modelling-to-Explore-the-Human-Elephant-Conflict/blob/swin_loveda/code/Swin-v2/demo/inference_demo.ipynb)
 
-Train the model in Colab [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://githubtocolab.com/kavin-du/e16-4yp-Using-Computer-Vision-and-Agent-Based-Modelling-to-Explore-the-Human-Elephant-Conflict/blob/swin_loveda/code/Swin-v2/main.ipynb)
+Train the model in Colab [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://githubtocolab.com/kavin-du/e16-4yp-Using-Computer-Vision-and-Agent-Based-Modelling-to-Explore-the-Human-Elephant-Conflict/blob/swin_loveda/code/Swin-v2/demo/main.ipynb)
 
 1. Run the following script to create environments using Conda. Enter the desired name for the env. 
 ```console
