@@ -1,5 +1,7 @@
 Check inference in Colab [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://githubtocolab.com/kavin-du/e16-4yp-Using-Computer-Vision-and-Agent-Based-Modelling-to-Explore-the-Human-Elephant-Conflict/blob/swin_loveda/code/Swin-v2/demo/inference_demo.ipynb)
 
+Train the model in Colab [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://githubtocolab.com/kavin-du/e16-4yp-Using-Computer-Vision-and-Agent-Based-Modelling-to-Explore-the-Human-Elephant-Conflict/blob/swin_loveda/code/Swin-v2/main.ipynb)
+
 1. Run the following script to create environments using Conda. Enter the desired name for the env. 
 ```console
 bash script1_create_env.sh
@@ -46,9 +48,9 @@ tools/dist_train.sh configs/swin/upernet_swin_tiny_patch4_window7_512x512_160k_l
 ```
 
 *To train Swin-T MoBY SSL backbone using 8 GPUs, run:
-# needs to be updated
 
 ```python
+# needs to be updated
 tools/dist_train.sh configs/swin/upernet_swin_tiny_patch4_window7_512x512_160k_loveda.py 8 --options model.pretrained=moby_swin_t_300ep_pretrained.pth
 
 ```
