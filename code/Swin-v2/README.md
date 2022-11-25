@@ -40,12 +40,20 @@ python tools/train.py <CONFIG_FILE> --options model.pretrained=<PRETRAIN_MODEL> 
 # multi-gpu training
 tools/dist_train.sh <CONFIG_FILE> <GPU_NUM> --options model.pretrained=<PRETRAIN_MODEL> [model.backbone.use_checkpoint=True] [other optional arguments] 
 ```
-For example, to train an UPerNet model with a Swin-T backbone and 8 GPUs, run:
+For example, to train an UPerNet model with a Swin-Tiny backbone and 8 GPUs, run:
 
 ```python
 tools/dist_train.sh configs/swin/upernet_swin_tiny_patch4_window7_512x512_160k_loveda.py 8 --cfg-options model.pretrained=swin_tiny_patch4_window7_224_22k_converted.pth
 
 ```
+
+To train an UPerNet model with a Swin-Large backbone and 8 GPUs, run:
+
+```python
+tools/dist_train.sh configs/swin/upernet_swin_base_patch4_window7_512x512_160k_loveda.py 8 --cfg-options model.pretrained=swin_base_patch4_window12_384_22kto1k_converted.pth
+
+```
+
 
 *To train Swin-T MoBY SSL backbone using 8 GPUs, run:
 
