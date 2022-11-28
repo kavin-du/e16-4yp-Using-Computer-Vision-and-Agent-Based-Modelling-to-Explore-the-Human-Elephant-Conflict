@@ -58,7 +58,6 @@ tools/dist_train.sh configs/swin/upernet_swin_base_patch4_window7_512x512_160k_l
 *To train Swin-T MoBY SSL backbone using 8 GPUs, run:
 
 ```python
-# needs to be updated
-tools/dist_train.sh configs/swin/upernet_swin_tiny_patch4_window7_512x512_160k_loveda.py 8 --options model.pretrained=moby_swin_t_300ep_pretrained.pth
+tools/dist_train.sh configs/swin/upernet_swin_tiny_patch4_window7_512x512_160k_loveda.py 8 --cfg-options model.pretrained=ssl_pretrained.pth
 
 ```
