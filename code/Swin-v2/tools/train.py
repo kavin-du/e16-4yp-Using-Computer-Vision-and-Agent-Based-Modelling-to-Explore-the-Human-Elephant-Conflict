@@ -209,7 +209,7 @@ def main():
             'avoid this error.')
         model = revert_sync_batchnorm(model)
 
-    logger.info(model)
+    # logger.info(model)
 
     datasets = [build_dataset(cfg.data.train)]
     if len(cfg.workflow) == 2:
